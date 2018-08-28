@@ -309,6 +309,7 @@ class _DraggableCardState extends State<DraggableCard> with TickerProviderStateM
   }
 
   void _onPanStart(DragStartDetails details) {
+    if (!widget.isDraggable) return;
     dragStart = details.globalPosition;
 
     if (slideBackAnimation.isAnimating) {
@@ -317,6 +318,7 @@ class _DraggableCardState extends State<DraggableCard> with TickerProviderStateM
   }
 
   void _onPanUpdate(DragUpdateDetails details) {
+    if (!widget.isDraggable) return;
     setState(() {
       dragPosition = details.globalPosition;
       cardOffset = dragPosition - dragStart;
@@ -328,6 +330,7 @@ class _DraggableCardState extends State<DraggableCard> with TickerProviderStateM
   }
 
   void _onPanEnd(DragEndDetails details) {
+    if (!widget.isDraggable) return;
     final dragVector = cardOffset / cardOffset.distance;
     final isInLeftRegion = (cardOffset.dx / context.size.width) < -0.45;
     final isInRightRegion = (cardOffset.dx / context.size.width) > 0.45;
